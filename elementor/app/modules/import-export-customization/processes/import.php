@@ -307,7 +307,16 @@ class Import {
 			throw new \Exception( 'Couldn’t execute the import process because no import runners have been specified. Try again by specifying import runners.' );
 		}
 
-		$data = $this->build_runner_data();
+		$data = [
+			'session_id' => $this->session_id,
+			'include' => $this->settings_include,
+			'manifest' => $this->manifest,
+			'site_settings' => $this->site_settings,
+			'selected_plugins' => $this->settings_selected_plugins,
+			'customization' => $this->settings_customization,
+			'extracted_directory_path' => $this->extracted_directory_path,
+			'selected_custom_post_types' => $this->settings_selected_custom_post_types,
+		];
 
 		$this->init_import_session();
 
@@ -353,7 +362,16 @@ class Import {
 			throw new \Exception( 'Couldn’t execute the import process because no import runners have been specified. Try again by specifying import runners.' );
 		}
 
-		$data = $this->build_runner_data();
+		$data = [
+			'session_id' => $this->session_id,
+			'include' => $this->settings_include,
+			'manifest' => $this->manifest,
+			'site_settings' => $this->site_settings,
+			'selected_plugins' => $this->settings_selected_plugins,
+			'customization' => $this->settings_customization,
+			'extracted_directory_path' => $this->extracted_directory_path,
+			'selected_custom_post_types' => $this->settings_selected_custom_post_types,
+		];
 
 		add_filter( 'elementor/document/save/data', [ $this, 'prevent_saving_elements_on_post_creation' ], 10, 2 );
 
@@ -453,25 +471,7 @@ class Import {
 	}
 
 	public function get_runners_name(): array {
-		$data = $this->build_runner_data();
-
-		return array_keys( array_filter(
-			$this->runners,
-			fn( $runner ) => $runner->should_import( $data )
-		) );
-	}
-
-	private function build_runner_data(): array {
-		return [
-			'session_id' => $this->session_id,
-			'include' => $this->settings_include,
-			'manifest' => $this->manifest,
-			'site_settings' => $this->site_settings,
-			'selected_plugins' => $this->settings_selected_plugins,
-			'customization' => $this->settings_customization,
-			'extracted_directory_path' => $this->extracted_directory_path,
-			'selected_custom_post_types' => $this->settings_selected_custom_post_types,
-		];
+		return array_keys( $this->runners );
 	}
 
 	public function get_manifest() {

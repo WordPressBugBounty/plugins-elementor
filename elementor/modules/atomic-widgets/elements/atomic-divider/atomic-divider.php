@@ -105,8 +105,4 @@ class Atomic_Divider extends Atomic_Widget_Base {
 			'elementor/elements/atomic-divider' => __DIR__ . '/atomic-divider.html.twig',
 		];
 	}
-
-	public function render_markdown(): string {
-		return '---';
-	}
 }

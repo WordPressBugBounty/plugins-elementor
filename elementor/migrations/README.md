@@ -197,13 +197,13 @@ Move nested object structure
 **Context**: Rename a widget settings key from `tag` → `htmlTag`. Paths start at **widget settings root**.
 
 ```json
-//manifest.json
 {
-  "widgetKeys": {
-    "e-heading": [
-      { "from": "tag", "to": "htmlTag" }
+  "up": [
+    { "op": { "fn": "set", "path": "tag", "key": "htmlTag" } }
   ],
-  "propTypes": {}
+  "down": [
+    { "op": { "fn": "set", "path": "htmlTag", "key": "tag" } }
+  ]
 }
 ```
 

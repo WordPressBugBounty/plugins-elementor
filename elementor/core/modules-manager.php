@@ -85,7 +85,6 @@ class Modules_Manager {
 			'page-templates',
 			'gutenberg',
 			'wp-cli',
-			'mcp',
 			'wp-rest',
 			'safe-mode',
 			'ai',
@@ -139,8 +138,6 @@ class Modules_Manager {
 			'feedback',
 			'widget-creation',
 			'editor-one',
-			'markdown-render',
-			'elementor-capabilities-mcp',
 		];
 	}
 

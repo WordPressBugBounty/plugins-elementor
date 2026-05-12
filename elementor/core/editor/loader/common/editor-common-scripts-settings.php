@@ -150,7 +150,7 @@ class Editor_Common_Scripts_Settings {
 							'Statement',
 							'WCAG',
 							'Ally',
-							'Compliance',
+							'Complaince',
 						],
 					],
 				],

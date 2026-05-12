@@ -102,13 +102,10 @@ class Site_Settings extends Export_Runner_Base {
 	}
 
 	public function get_classes_count(): int {
-		$kit = Plugin::$instance->kits_manager->get_active_kit();
+		$classes_repository = \Elementor\Modules\GlobalClasses\Global_Classes_Repository::make();
+		$classes_data = $classes_repository->all()->get();
 
-		if ( ! $kit ) {
-			return 0;
-		}
-
-		return count( \Elementor\Modules\GlobalClasses\Global_Classes_Order::make( $kit )->get_order() );
+		return count( $classes_data['items'] ?? [] );
 	}
 
 	public function get_variables_count(): int {
@@ -119,7 +116,7 @@ class Site_Settings extends Export_Runner_Base {
 
 		foreach ( $collection->all() as $variable ) {
 			if ( ! $variable->is_deleted() ) {
-				++$count;
+				$count++;
 			}
 		}
 

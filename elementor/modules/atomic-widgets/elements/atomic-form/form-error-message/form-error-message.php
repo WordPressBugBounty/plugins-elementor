@@ -9,8 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Form_Error_Message extends Form_Message {
 
-	public static $widget_description = 'Shown when the form submission fails. Hidden by default, displayed automatically when the form submission result is an error.';
-
 	public static function get_type() {
 		return 'e-form-error-message';
 	}

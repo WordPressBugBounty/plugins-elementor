@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 4.0.8 - 2026-05-12 =
+
+* Tweak: Updated WordPress compatibility to version 7.0
+
 = 4.0.7 - 2026-05-06 =
 
 * Tweak: Updated endpoint URL to align with migration infrastructure - Atomic Editor
@@ -60,15 +64,6 @@
 * Fix: Selecting "auto" for size returns an incorrect value - Atomic Editor
 * Fix: Resetting position does not clear related properties - Atomic Editor
 * Fix: Variable name field does not auto-focus on creation in Variables - Atomic Editor
-
-= 3.35.9 - 2026-03-25 =
-
-* Fix: Inserting AI-generated images fails when "Enable Unfiltered File Uploads" is enabled
-
-= 3.35.8 - 2026-03-23 =
-
-* Security Fix: Improved code security enforcement in Template Library
-* Security Fix: Improved code security enforcement in upload mechanism
 
 = 3.35.7 - 2026-03-11 =
 

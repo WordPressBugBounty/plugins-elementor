@@ -1413,7 +1413,7 @@ class Container extends Element_Base {
 				'label' => esc_html__( 'Column Span', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'' => ' ' . esc_html__( 'Default', 'elementor' ),
+					'' => ' Default',
 					'1' => '1',
 					'2' => '2',
 					'3' => '3',
@@ -1426,7 +1426,7 @@ class Container extends Element_Base {
 					'10' => '10',
 					'11' => '11',
 					'12' => '12',
-					'custom' => esc_html__( 'Custom', 'elementor' ),
+					'custom' => 'Custom',
 				],
 				'selectors' => [
 					'{{WRAPPER}}' => 'grid-column: span {{VALUE}};',
@@ -1457,7 +1457,7 @@ class Container extends Element_Base {
 				'label' => esc_html__( 'Row Span', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'' => ' ' . esc_html__( 'Default', 'elementor' ),
+					'' => ' Default',
 					'1' => '1',
 					'2' => '2',
 					'3' => '3',
@@ -1470,7 +1470,7 @@ class Container extends Element_Base {
 					'10' => '10',
 					'11' => '11',
 					'12' => '12',
-					'custom' => esc_html__( 'Custom', 'elementor' ),
+					'custom' => 'Custom',
 				],
 				'selectors' => [
 					'{{WRAPPER}}' => 'grid-row: span {{VALUE}};',

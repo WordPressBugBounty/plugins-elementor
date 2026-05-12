@@ -7,5 +7,3 @@ __( 'or rename it later.', 'elementor' );
 __( 'New Page', 'elementor' );
 __( 'Cancel', 'elementor' );
 __( 'Save', 'elementor' );
-__( 'Multi-page', 'elementor' );
-__( 'One-page', 'elementor' );

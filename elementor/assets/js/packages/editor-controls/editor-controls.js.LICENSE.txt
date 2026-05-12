@@ -1,9 +1,3 @@
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
 /*! ../../../../bound-prop-context */
 
 /*! ../../../../components/control-form-label */
@@ -50,8 +44,6 @@ object-assign
 
 /*! ../../../hooks/use-repeatable-control-context */
 
-/*! ../../../hooks/use-repeater-popover-dismiss */
-
 /*! ../../../hooks/use-sync-external-state */
 
 /*! ../../../hooks/use-typing-buffer */
@@ -97,8 +89,6 @@ object-assign
 /*! ../../control-adornments/control-adornments */
 
 /*! ../../create-control */
-
-/*! ../../hooks/use-repeater-popover-dismiss */
 
 /*! ../../hooks/use-size-value */
 
@@ -198,8 +188,6 @@ object-assign
 
 /*! ../hooks/use-filtered-items-list */
 
-/*! ../hooks/use-form-field-suggestions */
-
 /*! ../hooks/use-repeatable-control-context */
 
 /*! ../hooks/use-size-extended-options */
@@ -232,8 +220,6 @@ object-assign
 
 /*! ../utils/convert-toggle-options-to-atomic */
 
-/*! ../utils/date-time */
-
 /*! ../utils/escape-html-attr */
 
 /*! ../utils/inline-editing */
@@ -243,10 +229,6 @@ object-assign
 /*! ../utils/resolve-size-value */
 
 /*! ../utils/size-control */
-
-/*! ./Transition */
-
-/*! ./TransitionGroupContext */
 
 /*! ./actions/tooltip-add-item-action */
 
@@ -264,11 +246,7 @@ object-assign
 
 /*! ./bound-prop-context */
 
-/*! ./checkPropTypes */
-
 /*! ./chips-control */
-
-/*! ./cjs/react-is.development.js */
 
 /*! ./cjs/react-jsx-runtime.development.js */
 
@@ -306,8 +284,6 @@ object-assign
 
 /*! ./conditional-tooltip */
 
-/*! ./config */
-
 /*! ./configs */
 
 /*! ./context/filter-config-context */
@@ -332,8 +308,6 @@ object-assign
 
 /*! ./controls/aspect-ratio-control */
 
-/*! ./controls/attachment-type-control */
-
 /*! ./controls/background-control/background-control */
 
 /*! ./controls/box-shadow-repeater-control */
@@ -341,8 +315,6 @@ object-assign
 /*! ./controls/chips-control */
 
 /*! ./controls/color-control */
-
-/*! ./controls/date-range-control */
 
 /*! ./controls/date-time-control */
 
@@ -369,8 +341,6 @@ object-assign
 /*! ./controls/link-control */
 
 /*! ./controls/linked-dimensions-control */
-
-/*! ./controls/mention-text-area-control */
 
 /*! ./controls/number-control */
 
@@ -400,10 +370,6 @@ object-assign
 
 /*! ./controls/text-control */
 
-/*! ./controls/time-range-control */
-
-/*! ./controls/time-string-control */
-
 /*! ./controls/toggle-control */
 
 /*! ./controls/transform-control/transform-repeater-control */
@@ -422,8 +388,6 @@ object-assign
 
 /*! ./data */
 
-/*! ./date-string-control */
-
 /*! ./drop-shadow/drop-shadow-item-content */
 
 /*! ./drop-shadow/drop-shadow-item-label */
@@ -431,8 +395,6 @@ object-assign
 /*! ./enqueue-font */
 
 /*! ./errors */
-
-/*! ./factoryWithTypeCheckers */
 
 /*! ./filter-content */
 
@@ -450,7 +412,7 @@ object-assign
 
 /*! ./get-prop-type-settings */
 
-/*! ./hasClass */
+/*! ./has-size-value */
 
 /*! ./hooks/use-font-families */
 
@@ -474,12 +436,6 @@ object-assign
 
 /*! ./items/items-container */
 
-/*! ./lib/ReactPropTypesSecret */
-
-/*! ./lib/has */
-
-/*! ./mention-text-area-control */
-
 /*! ./promotion-trigger */
 
 /*! ./prop-context */
@@ -500,8 +456,6 @@ object-assign
 
 /*! ./select-control */
 
-/*! ./setPrototypeOf.js */
-
 /*! ./single-size/single-size-item-content */
 
 /*! ./single-size/single-size-item-label */
@@ -509,8 +463,6 @@ object-assign
 /*! ./size-component */
 
 /*! ./size-control */
-
-/*! ./size-control/unstable-size-control */
 
 /*! ./size-field */
 
@@ -520,9 +472,9 @@ object-assign
 
 /*! ./switch-control */
 
-/*! ./text-control */
+/*! ./text-area-control */
 
-/*! ./time-string-control */
+/*! ./text-control */
 
 /*! ./trainsition-events */
 
@@ -558,13 +510,9 @@ object-assign
 
 /*! ./use-transform-tabs-history */
 
-/*! ./use-unit-sync */
-
-/*! ./utils/PropTypes */
+/*! ./utils/has-size-value */
 
 /*! ./utils/is-extended-unit */
-
-/*! ./utils/reflow */
 
 /*! ./utils/resolve-bound-prop-value */
 
@@ -579,12 +527,6 @@ object-assign
 /*! ./utils/size-control */
 
 /*! ./utils/tracking */
-
-/*! @babel/runtime/helpers/esm/extends */
-
-/*! @babel/runtime/helpers/esm/inheritsLoose */
-
-/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */
 
 /*! @elementor/editor-current-user */
 
@@ -666,41 +608,11 @@ object-assign
 
 /*! dayjs */
 
-/*! dom-helpers/addClass */
-
-/*! dom-helpers/removeClass */
-
 /*! fast-equals */
 
 /*! linkifyjs */
 
-/*! object-assign */
-
 /*! orderedmap */
-
-/*! primereact/api */
-
-/*! primereact/componentbase */
-
-/*! primereact/csstransition */
-
-/*! primereact/hooks */
-
-/*! primereact/keyfilter */
-
-/*! primereact/mention */
-
-/*! primereact/overlayservice */
-
-/*! primereact/portal */
-
-/*! primereact/ripple */
-
-/*! primereact/tooltip */
-
-/*! primereact/utils */
-
-/*! prop-types */
 
 /*! prosemirror-commands */
 
@@ -719,10 +631,6 @@ object-assign
 /*! react */
 
 /*! react-dom */
-
-/*! react-is */
-
-/*! react-transition-group */
 
 /*! react/jsx-runtime */
 
@@ -775,10 +683,6 @@ object-assign
   \*****************************************/
 
 /*!******************************************!*\
-  !*** ./node_modules/prop-types/index.js ***!
-  \******************************************/
-
-/*!******************************************!*\
   !*** external ["elementorV2","session"] ***!
   \******************************************/
 
@@ -799,16 +703,8 @@ object-assign
   \*******************************************/
 
 /*!********************************************!*\
-  !*** ./node_modules/prop-types/lib/has.js ***!
-  \********************************************/
-
-/*!********************************************!*\
   !*** external ["elementorV2","locations"] ***!
   \********************************************/
-
-/*!*********************************************!*\
-  !*** ./node_modules/object-assign/index.js ***!
-  \*********************************************/
 
 /*!*********************************************!*\
   !*** external ["elementorV2","httpClient"] ***!
@@ -821,10 +717,6 @@ object-assign
 /*!***********************************************!*\
   !*** ./node_modules/orderedmap/dist/index.js ***!
   \***********************************************/
-
-/*!************************************************!*\
-  !*** ./node_modules/primereact/api/api.esm.js ***!
-  \************************************************/
 
 /*!*************************************************!*\
   !*** ./node_modules/@tiptap/core/dist/index.js ***!
@@ -841,18 +733,6 @@ object-assign
 /*!**************************************************!*\
   !*** ./node_modules/@tiptap/react/dist/index.js ***!
   \**************************************************/
-
-/*!**************************************************!*\
-  !*** ./node_modules/dom-helpers/esm/addClass.js ***!
-  \**************************************************/
-
-/*!**************************************************!*\
-  !*** ./node_modules/dom-helpers/esm/hasClass.js ***!
-  \**************************************************/
-
-/*!***************************************************!*\
-  !*** ./node_modules/prop-types/checkPropTypes.js ***!
-  \***************************************************/
 
 /*!***************************************************!*\
   !*** external ["elementorV2","editorResponsive"] ***!
@@ -871,14 +751,6 @@ object-assign
   \****************************************************/
 
 /*!****************************************************!*\
-  !*** ./node_modules/primereact/hooks/hooks.esm.js ***!
-  \****************************************************/
-
-/*!****************************************************!*\
-  !*** ./node_modules/primereact/utils/utils.esm.js ***!
-  \****************************************************/
-
-/*!****************************************************!*\
   !*** external ["elementorV2","editorCurrentUser"] ***!
   \****************************************************/
 
@@ -891,23 +763,11 @@ object-assign
   \*****************************************************/
 
 /*!*****************************************************!*\
-  !*** ./node_modules/dom-helpers/esm/removeClass.js ***!
-  \*****************************************************/
-
-/*!*****************************************************!*\
   !*** ./node_modules/prosemirror-view/dist/index.js ***!
   \*****************************************************/
 
 /*!******************************************************!*\
   !*** ./node_modules/@tiptap/pm/dist/keymap/index.js ***!
-  \******************************************************/
-
-/*!******************************************************!*\
-  !*** ./node_modules/primereact/portal/portal.esm.js ***!
-  \******************************************************/
-
-/*!******************************************************!*\
-  !*** ./node_modules/primereact/ripple/ripple.esm.js ***!
   \******************************************************/
 
 /*!******************************************************!*\
@@ -924,14 +784,6 @@ object-assign
 
 /*!********************************************************!*\
   !*** ./node_modules/@tiptap/pm/dist/commands/index.js ***!
-  \********************************************************/
-
-/*!********************************************************!*\
-  !*** ./node_modules/primereact/mention/mention.esm.js ***!
-  \********************************************************/
-
-/*!********************************************************!*\
-  !*** ./node_modules/primereact/tooltip/tooltip.esm.js ***!
   \********************************************************/
 
 /*!*********************************************************!*\
@@ -963,28 +815,12 @@ object-assign
   \***********************************************************/
 
 /*!***********************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/config.js ***!
-  \***********************************************************/
-
-/*!***********************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/api.ts ***!
   \***********************************************************/
 
 /*!***********************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/env.ts ***!
   \***********************************************************/
-
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \************************************************************/
-
-/*!************************************************************!*\
-  !*** ./node_modules/primereact/keyfilter/keyfilter.esm.js ***!
-  \************************************************************/
-
-/*!************************************************************!*\
-  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
-  \************************************************************/
 
 /*!************************************************************!*\
   !*** ./node_modules/prosemirror-schema-list/dist/index.js ***!
@@ -1003,10 +839,6 @@ object-assign
   \*************************************************************/
 
 /*!*************************************************************!*\
-  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
-  \*************************************************************/
-
-/*!*************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/index.ts ***!
   \*************************************************************/
 
@@ -1016,10 +848,6 @@ object-assign
 
 /*!***************************************************************!*\
   !*** ./node_modules/@tiptap/extension-document/dist/index.js ***!
-  \***************************************************************/
-
-/*!***************************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/Transition.js ***!
   \***************************************************************/
 
 /*!****************************************************************!*\
@@ -1034,16 +862,8 @@ object-assign
   !*** ./node_modules/@tiptap/extension-underline/dist/index.js ***!
   \****************************************************************/
 
-/*!****************************************************************!*\
-  !*** ./node_modules/prop-types/node_modules/react-is/index.js ***!
-  \****************************************************************/
-
 /*!*****************************************************************!*\
   !*** ./node_modules/@tiptap/extension-hard-break/dist/index.js ***!
-  \*****************************************************************/
-
-/*!*****************************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/utils/reflow.js ***!
   \*****************************************************************/
 
 /*!*****************************************************************!*\
@@ -1051,44 +871,16 @@ object-assign
   \*****************************************************************/
 
 /*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
-  \******************************************************************/
-
-/*!******************************************************************!*\
   !*** ./node_modules/@tiptap/extension-superscript/dist/index.js ***!
   \******************************************************************/
-
-/*!******************************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/CSSTransition.js ***!
-  \******************************************************************/
-
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
-  \*******************************************************************/
 
 /*!*******************************************************************!*\
   !*** ./node_modules/@tiptap/core/dist/jsx-runtime/jsx-runtime.js ***!
   \*******************************************************************/
 
 /*!********************************************************************!*\
-  !*** ./node_modules/primereact/componentbase/componentbase.esm.js ***!
-  \********************************************************************/
-
-/*!********************************************************************!*\
-  !*** ./node_modules/primereact/csstransition/csstransition.esm.js ***!
-  \********************************************************************/
-
-/*!********************************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/utils/PropTypes.js ***!
-  \********************************************************************/
-
-/*!********************************************************************!*\
   !*** ./node_modules/use-sync-external-store/shim/with-selector.js ***!
   \********************************************************************/
-
-/*!**********************************************************************!*\
-  !*** ./node_modules/primereact/overlayservice/overlayservice.esm.js ***!
-  \**********************************************************************/
 
 /*!**********************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/utils/tracking.ts ***!
@@ -1098,10 +890,6 @@ object-assign
   !*** ./packages/packages/libs/editor-controls/src/create-control.tsx ***!
   \***********************************************************************/
 
-/*!***********************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/utils/date-time.ts ***!
-  \***********************************************************************/
-
 /*!**************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/services/event-bus.ts ***!
   \**************************************************************************/
@@ -1109,10 +897,6 @@ object-assign
 /*!**************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/utils/size-control.ts ***!
   \**************************************************************************/
-
-/*!***************************************************************************!*\
-  !*** ./node_modules/react-transition-group/esm/TransitionGroupContext.js ***!
-  \***************************************************************************/
 
 /*!****************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/hooks/use-size-value.ts ***!
@@ -1211,10 +995,6 @@ object-assign
   \********************************************************************************/
 
 /*!*********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \*********************************************************************************/
-
-/*!*********************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/bound-prop-context/errors.ts ***!
   \*********************************************************************************/
 
@@ -1237,10 +1017,6 @@ object-assign
 /*!**********************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/position-control.tsx ***!
   \**********************************************************************************/
-
-/*!***********************************************************************************!*\
-  !*** ./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js ***!
-  \***********************************************************************************/
 
 /*!***********************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/components/popover-content.tsx ***!
@@ -1271,15 +1047,7 @@ object-assign
   \************************************************************************************/
 
 /*!************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/date-range-control.tsx ***!
-  \************************************************************************************/
-
-/*!************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/repeatable-control.tsx ***!
-  \************************************************************************************/
-
-/*!************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/time-range-control.tsx ***!
   \************************************************************************************/
 
 /*!*************************************************************************************!*\
@@ -1291,19 +1059,11 @@ object-assign
   \*************************************************************************************/
 
 /*!*************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/date-string-control.tsx ***!
-  \*************************************************************************************/
-
-/*!*************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/filter-control/utils.ts ***!
   \*************************************************************************************/
 
 /*!*************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/image-media-control.tsx ***!
-  \*************************************************************************************/
-
-/*!*************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/time-string-control.tsx ***!
   \*************************************************************************************/
 
 /*!*************************************************************************************!*\
@@ -1366,10 +1126,6 @@ object-assign
   !*** ./packages/packages/libs/editor-controls/src/controls/transition-control/data.ts ***!
   \****************************************************************************************/
 
-/*!****************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/hooks/use-form-field-suggestions.ts ***!
-  \****************************************************************************************/
-
 /*!*****************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/bound-prop-context/use-bound-prop.ts ***!
   \*****************************************************************************************/
@@ -1387,10 +1143,6 @@ object-assign
   \*****************************************************************************************/
 
 /*!*****************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/attachment-type-control.tsx ***!
-  \*****************************************************************************************/
-
-/*!*****************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/size-control/size-field.tsx ***!
   \*****************************************************************************************/
 
@@ -1400,10 +1152,6 @@ object-assign
 
 /*!******************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/components/popover-grid-container.tsx ***!
-  \******************************************************************************************/
-
-/*!******************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/hooks/use-repeater-popover-dismiss.ts ***!
   \******************************************************************************************/
 
 /*!*******************************************************************************************!*\
@@ -1424,10 +1172,6 @@ object-assign
 
 /*!*******************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/linked-dimensions-control.tsx ***!
-  \*******************************************************************************************/
-
-/*!*******************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/mention-text-area-control.tsx ***!
   \*******************************************************************************************/
 
 /*!********************************************************************************************!*\
@@ -1531,10 +1275,6 @@ object-assign
   \*************************************************************************************************/
 
 /*!*************************************************************************************************!*\
-  !*** ./packages/packages/libs/editor-controls/src/controls/size-control/hooks/use-unit-sync.ts ***!
-  \*************************************************************************************************/
-
-/*!*************************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/transform-control/initial-values.ts ***!
   \*************************************************************************************************/
 
@@ -1548,6 +1288,10 @@ object-assign
 
 /*!**************************************************************************************************!*\
   !*** ./packages/packages/libs/editor-controls/src/controls/size-control/hooks/use-size-value.ts ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./packages/packages/libs/editor-controls/src/controls/size-control/utils/has-size-value.ts ***!
   \**************************************************************************************************/
 
 /*!**************************************************************************************************!*\
@@ -1795,15 +1539,6 @@ object-assign
  * use-sync-external-store-shim/with-selector.development.js
  *
  * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.

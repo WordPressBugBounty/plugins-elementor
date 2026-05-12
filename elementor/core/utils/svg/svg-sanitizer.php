@@ -266,7 +266,7 @@ class Svg_Sanitizer {
 		$allowed_attributes = [
 			'accent-height',
 			'accumulate',
-			'additive',
+			'additivive',
 			'alignment-baseline',
 			'aria-hidden',
 			'aria-controls',

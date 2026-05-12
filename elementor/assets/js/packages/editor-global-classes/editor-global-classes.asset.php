@@ -29,7 +29,6 @@ return [
 		'elementor-v2-ui',
 		'elementor-v2-utils',
 		'react',
-		'react-dom',
 		'wp-i18n',
 	],
 ];

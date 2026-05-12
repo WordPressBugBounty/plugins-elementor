@@ -164,9 +164,9 @@ class Dynamic_Tags_Editor_Config {
 			return null;
 		}
 
-		$is_convertible = ! isset( $control['name'], $control['section'], $control['label'], $control['default'] );
+		$is_convertable = ! isset( $control['name'], $control['section'], $control['label'], $control['default'] );
 
-		if ( $is_convertible ) {
+		if ( $is_convertable ) {
 			throw new \Exception( 'Control must have name, section, label, and default' );
 		}
 
