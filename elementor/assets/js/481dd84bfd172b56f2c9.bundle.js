@@ -1,5 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+(self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["modules_nested-elements_assets_js_editor_nested-element-types-base_js"],{
 
 /***/ "../assets/dev/js/editor/utils/editor-one-events.js":
 /*!**********************************************************!*\
@@ -485,10 +484,10 @@ var _default = exports["default"] = EditorOneEventManager;
 
 /***/ }),
 
-/***/ "../modules/editor-one/assets/js/admin-menu/classes/flyout-interaction-handler.js":
-/*!****************************************************************************************!*\
-  !*** ../modules/editor-one/assets/js/admin-menu/classes/flyout-interaction-handler.js ***!
-  \****************************************************************************************/
+/***/ "../modules/nested-elements/assets/js/editor/nested-element-types-base.js":
+/*!********************************************************************************!*\
+  !*** ../modules/nested-elements/assets/js/editor/nested-element-types-base.js ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -498,514 +497,242 @@ var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/inte
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.FlyoutInteractionHandler = void 0;
+exports["default"] = exports.NestedElementTypesBase = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var _menuEventsTracker = __webpack_require__(/*! ./menu-events-tracker */ "../modules/editor-one/assets/js/admin-menu/classes/menu-events-tracker.js");
-var FlyoutInteractionHandler = exports.FlyoutInteractionHandler = /*#__PURE__*/function () {
-  function FlyoutInteractionHandler() {
-    (0, _classCallCheck2.default)(this, FlyoutInteractionHandler);
-    this.activeMenu = null;
-    this.activeParent = null;
-    this.closeTimeout = null;
-    this.lastMousePos = null;
-    this.exitPoint = null;
-    this.mouseMoveHandler = null;
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "../node_modules/@babel/runtime/helpers/inherits.js"));
+var _view = _interopRequireDefault(__webpack_require__(/*! ./views/view */ "../modules/nested-elements/assets/js/editor/views/view.js"));
+var _empty = _interopRequireDefault(__webpack_require__(/*! ./views/empty */ "../modules/nested-elements/assets/js/editor/views/empty.js"));
+function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2.default)(o), (0, _possibleConstructorReturn2.default)(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2.default)(t).constructor) : o.apply(t, e)); }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+/**
+ * @typedef {import('../../../../../assets/dev/js/editor/elements/types/base/element-base')} ElementBase
+ */
+var NestedElementTypesBase = exports.NestedElementTypesBase = /*#__PURE__*/function (_elementor$modules$el) {
+  function NestedElementTypesBase() {
+    (0, _classCallCheck2.default)(this, NestedElementTypesBase);
+    return _callSuper(this, NestedElementTypesBase, arguments);
   }
-  return (0, _createClass2.default)(FlyoutInteractionHandler, [{
-    key: "handle",
-    value: function handle() {
-      this.setupFlyoutMenus();
-      this.setupMobileSupport();
+  (0, _inherits2.default)(NestedElementTypesBase, _elementor$modules$el);
+  return (0, _createClass2.default)(NestedElementTypesBase, [{
+    key: "getType",
+    value: function getType() {
+      elementorModules.ForceMethodImplementation();
     }
   }, {
-    key: "setupFlyoutMenus",
-    value: function setupFlyoutMenus() {
-      var _this = this;
-      var menuItems = document.querySelectorAll('#adminmenu li.elementor-has-flyout');
-      menuItems.forEach(function (parentLi) {
-        var flyoutMenu = parentLi.querySelector('.elementor-submenu-flyout');
-        if (!flyoutMenu) {
-          return;
-        }
-        _this.attachHoverEvents(parentLi, flyoutMenu);
-        _this.attachFocusEvents(parentLi, flyoutMenu);
-        _this.attachKeyboardEvents(parentLi, flyoutMenu);
-      });
+    key: "getView",
+    value: function getView() {
+      return _view.default;
     }
   }, {
-    key: "attachHoverEvents",
-    value: function attachHoverEvents(parentLi, flyoutMenu) {
-      var _this2 = this;
-      parentLi.addEventListener('mouseenter', function () {
-        // If moving to a new parent that is NOT part of the current active tree
-        if (_this2.activeMenu && !_this2.activeMenu.contains(parentLi) && _this2.activeMenu !== flyoutMenu) {
-          // If we are moving to a sibling or unrelated menu, close the current one immediately
-          // UNLESS we are in the safe zone triangle of the parent
-          if (!_this2.isCursorInSafeZone()) {
-            _this2.hideFlyout(_this2.activeMenu);
-          }
-        }
-        _this2.clearCloseTimeout();
-        _this2.showFlyout(parentLi, flyoutMenu);
-      });
-      parentLi.addEventListener('mouseleave', function (event) {
-        _this2.exitPoint = {
-          x: event.clientX,
-          y: event.clientY
-        };
-        _this2.scheduleClose(parentLi, flyoutMenu);
-      });
-      flyoutMenu.addEventListener('mouseenter', function () {
-        _this2.clearCloseTimeout();
-        _this2.stopMouseTracking();
-      });
-      flyoutMenu.addEventListener('mouseleave', function (event) {
-        _this2.exitPoint = {
-          x: event.clientX,
-          y: event.clientY
-        };
-        _this2.scheduleClose(parentLi, flyoutMenu);
-      });
+    key: "getEmptyView",
+    value: function getEmptyView() {
+      return _empty.default;
     }
   }, {
-    key: "attachFocusEvents",
-    value: function attachFocusEvents(parentLi, flyoutMenu) {
-      var _this3 = this;
-      var parentLink = parentLi.querySelector(':scope > a');
-      if (parentLink) {
-        parentLink.addEventListener('focus', function () {
-          _this3.showFlyout(parentLi, flyoutMenu);
-        });
-      }
-      flyoutMenu.addEventListener('focusout', function (event) {
-        if (!parentLi.contains(event.relatedTarget)) {
-          _this3.hideFlyout(flyoutMenu);
-        }
-      });
-    }
-  }, {
-    key: "attachKeyboardEvents",
-    value: function attachKeyboardEvents(parentLi, flyoutMenu) {
-      var _this4 = this;
-      parentLi.addEventListener('keydown', function (event) {
-        _this4.handleKeyNavigation(event, parentLi, flyoutMenu);
-      });
-    }
-  }, {
-    key: "showFlyout",
-    value: function showFlyout(parentLi, flyoutMenu) {
-      var wasAlreadyVisible = flyoutMenu.classList.contains('elementor-submenu-flyout-visible');
-      if (this.activeMenu && this.activeMenu !== flyoutMenu) {
-        this.hideFlyout(this.activeMenu);
-      }
-      this.exitPoint = null;
-      this.positionFlyout(parentLi, flyoutMenu);
-      flyoutMenu.classList.add('elementor-submenu-flyout-visible');
-      this.activeMenu = flyoutMenu;
-      this.activeParent = parentLi;
-      if (!wasAlreadyVisible) {
-        _menuEventsTracker.MenuEventsTracker.trackEditorSubMenuOpened();
-      }
-    }
-  }, {
-    key: "hideFlyout",
-    value: function hideFlyout(flyoutMenu) {
-      flyoutMenu.classList.remove('elementor-submenu-flyout-visible');
-      if (this.activeMenu === flyoutMenu) {
-        this.activeMenu = null;
-        this.activeParent = null;
-        this.exitPoint = null;
-        this.stopMouseTracking();
-      }
-    }
-  }, {
-    key: "scheduleClose",
-    value: function scheduleClose(parentLi, flyoutMenu) {
-      var _this5 = this;
-      this.clearCloseTimeout();
-      this.startMouseTracking(parentLi, flyoutMenu);
-      this.closeTimeout = setTimeout(function () {
-        _this5.checkAndClose(flyoutMenu);
-      }, 300);
-    }
-  }, {
-    key: "checkAndClose",
-    value: function checkAndClose(flyoutMenu) {
-      var _this6 = this;
-      if (!this.activeMenu) {
-        return;
-      }
-      if (!this.isCursorInSafeZone()) {
-        this.hideFlyout(flyoutMenu);
-      } else {
-        this.closeTimeout = setTimeout(function () {
-          _this6.checkAndClose(flyoutMenu);
-        }, 300);
-      }
-    }
-  }, {
-    key: "clearCloseTimeout",
-    value: function clearCloseTimeout() {
-      if (this.closeTimeout) {
-        clearTimeout(this.closeTimeout);
-        this.closeTimeout = null;
-      }
-    }
-  }, {
-    key: "startMouseTracking",
-    value: function startMouseTracking() {
-      var _this7 = this;
-      this.stopMouseTracking();
-      this.mouseMoveHandler = function (event) {
-        _this7.lastMousePos = {
-          x: event.clientX,
-          y: event.clientY
-        };
-      };
-      document.addEventListener('mousemove', this.mouseMoveHandler);
-    }
-  }, {
-    key: "stopMouseTracking",
-    value: function stopMouseTracking() {
-      if (this.mouseMoveHandler) {
-        document.removeEventListener('mousemove', this.mouseMoveHandler);
-        this.mouseMoveHandler = null;
-      }
-      this.lastMousePos = null;
-    }
-  }, {
-    key: "isCursorInSafeZone",
-    value: function isCursorInSafeZone() {
-      if (!this.lastMousePos || !this.activeMenu || !this.activeParent) {
-        return false;
-      }
-      var cursor = this.lastMousePos;
-      var parentRect = this.activeParent.getBoundingClientRect();
-      if (this.isPointInRect(cursor, parentRect)) {
-        return true;
-      }
-      var flyoutRect = this.activeMenu.getBoundingClientRect();
-      if (this.isPointInRect(cursor, flyoutRect)) {
-        return true;
-      }
-      return this.isPointInTriangle(cursor, parentRect, flyoutRect);
-    }
-  }, {
-    key: "isPointInRect",
-    value: function isPointInRect(point, rect) {
-      return point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom;
-    }
-  }, {
-    key: "isPointInTriangle",
-    value: function isPointInTriangle(cursor, parentRect, flyoutRect) {
-      var exitX = this.exitPoint ? this.exitPoint.x : parentRect.right;
-      var distParent = Math.abs(exitX - parentRect.right);
-      var distFlyout = Math.abs(exitX - flyoutRect.left);
-      var triangleApex, baseTop, baseBottom;
-
-      // Determine direction: Moving towards Flyout (default) or towards Parent (backwards)
-      if (distParent < distFlyout) {
-        // Moving towards Flyout
-        triangleApex = this.exitPoint || {
-          x: parentRect.right,
-          y: parentRect.top + parentRect.height / 2
-        };
-        baseTop = {
-          x: flyoutRect.left,
-          y: flyoutRect.top - 100
-        };
-        baseBottom = {
-          x: flyoutRect.left,
-          y: flyoutRect.bottom + 100
-        };
-      } else {
-        // Moving towards Parent
-        triangleApex = this.exitPoint || {
-          x: flyoutRect.left,
-          y: flyoutRect.top + flyoutRect.height / 2
-        };
-        baseTop = {
-          x: parentRect.right,
-          y: parentRect.top - 100
-        };
-        baseBottom = {
-          x: parentRect.right,
-          y: parentRect.bottom + 100
-        };
-      }
-      return this.pointInTriangle(cursor, triangleApex, baseTop, baseBottom);
-    }
-  }, {
-    key: "pointInTriangle",
-    value: function pointInTriangle(p, v1, v2, v3) {
-      var sign = function sign(p1, p2, p3) {
-        return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-      };
-      var d1 = sign(p, v1, v2);
-      var d2 = sign(p, v2, v3);
-      var d3 = sign(p, v3, v1);
-      var hasNeg = 0 > d1 || 0 > d2 || 0 > d3;
-      var hasPos = 0 < d1 || 0 < d2 || 0 < d3;
-      return !(hasNeg && hasPos);
-    }
-  }, {
-    key: "positionFlyout",
-    value: function positionFlyout(parentLi, flyoutMenu) {
-      var windowHeight = window.innerHeight;
-      var flyoutHeight = flyoutMenu.offsetHeight;
-      var parentRect = parentLi.getBoundingClientRect();
-      var relativeTop = parentRect.top;
-      if (relativeTop + flyoutHeight > windowHeight) {
-        var newTop = windowHeight - flyoutHeight - relativeTop;
-        if (newTop < -relativeTop) {
-          newTop = -relativeTop + 10;
-        }
-        flyoutMenu.style.top = newTop + 'px';
-      } else {
-        delete flyoutMenu.style.top;
-      }
-    }
-  }, {
-    key: "handleKeyNavigation",
-    value: function handleKeyNavigation(event, parentLi, flyoutMenu) {
-      var allLinks = flyoutMenu.querySelectorAll('a');
-      var focusedLink = flyoutMenu.querySelector('a:focus');
-      var currentIndex = Array.from(allLinks).indexOf(focusedLink);
-      var isVisible = flyoutMenu.classList.contains('elementor-submenu-flyout-visible');
-      switch (event.key) {
-        case 'ArrowRight':
-          if (!isVisible) {
-            var _allLinks$;
-            event.preventDefault();
-            this.showFlyout(parentLi, flyoutMenu);
-            (_allLinks$ = allLinks[0]) === null || _allLinks$ === void 0 || _allLinks$.focus();
-          }
-          break;
-        case 'ArrowLeft':
-          if (isVisible) {
-            var _parentLi$querySelect;
-            event.preventDefault();
-            this.hideFlyout(flyoutMenu);
-            (_parentLi$querySelect = parentLi.querySelector(':scope > a')) === null || _parentLi$querySelect === void 0 || _parentLi$querySelect.focus();
-          }
-          break;
-        case 'ArrowDown':
-          if (isVisible && currentIndex >= 0) {
-            var _allLinks$nextIndex;
-            event.preventDefault();
-            var nextIndex = (currentIndex + 1) % allLinks.length;
-            (_allLinks$nextIndex = allLinks[nextIndex]) === null || _allLinks$nextIndex === void 0 || _allLinks$nextIndex.focus();
-          }
-          break;
-        case 'ArrowUp':
-          if (isVisible && currentIndex >= 0) {
-            var _allLinks$prevIndex;
-            event.preventDefault();
-            var prevIndex = (currentIndex - 1 + allLinks.length) % allLinks.length;
-            (_allLinks$prevIndex = allLinks[prevIndex]) === null || _allLinks$prevIndex === void 0 || _allLinks$prevIndex.focus();
-          }
-          break;
-        case 'Escape':
-          if (isVisible) {
-            var _parentLi$querySelect2;
-            event.preventDefault();
-            this.hideFlyout(flyoutMenu);
-            (_parentLi$querySelect2 = parentLi.querySelector(':scope > a')) === null || _parentLi$querySelect2 === void 0 || _parentLi$querySelect2.focus();
-          }
-          break;
-      }
-    }
-  }, {
-    key: "setupMobileSupport",
-    value: function setupMobileSupport() {
-      var _this8 = this;
-      if (window.innerWidth > 782) {
-        return;
-      }
-      var menuLinks = document.querySelectorAll('#adminmenu li.elementor-has-flyout > a');
-      menuLinks.forEach(function (link) {
-        link.addEventListener('click', function (event) {
-          _this8.handleMobileClick(event, link);
-        });
-      });
-      document.addEventListener('click', function (event) {
-        _this8.handleDocumentClick(event);
-      });
-    }
-  }, {
-    key: "handleMobileClick",
-    value: function handleMobileClick(event, link) {
-      var parentLi = link.parentElement;
-      var flyoutMenu = parentLi.querySelector('.elementor-submenu-flyout');
-      if (!flyoutMenu) {
-        return;
-      }
-      if (parentLi.classList.contains('elementor-flyout-open')) {
-        return;
-      }
-      event.preventDefault();
-      document.querySelectorAll('#adminmenu li.elementor-has-flyout').forEach(function (item) {
-        item.classList.remove('elementor-flyout-open');
-      });
-      parentLi.classList.add('elementor-flyout-open');
-    }
-  }, {
-    key: "handleDocumentClick",
-    value: function handleDocumentClick(event) {
-      if (!event.target.closest('#adminmenu li.elementor-has-flyout')) {
-        document.querySelectorAll('#adminmenu li.elementor-has-flyout').forEach(function (item) {
-          item.classList.remove('elementor-flyout-open');
-        });
-      }
+    key: "getModel",
+    value: function getModel() {
+      return $e.components.get('nested-elements/nested-repeater').exports.NestedModelBase;
     }
   }]);
-}();
+}(elementor.modules.elements.types.Base);
+var _default = exports["default"] = NestedElementTypesBase;
 
 /***/ }),
 
-/***/ "../modules/editor-one/assets/js/admin-menu/classes/flyout-menu-renderer.js":
-/*!**********************************************************************************!*\
-  !*** ../modules/editor-one/assets/js/admin-menu/classes/flyout-menu-renderer.js ***!
-  \**********************************************************************************/
+/***/ "../modules/nested-elements/assets/js/editor/views/add-section-area.js":
+/*!*****************************************************************************!*\
+  !*** ../modules/nested-elements/assets/js/editor/views/add-section-area.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
 
 
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.FlyoutMenuRenderer = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var FlyoutMenuRenderer = exports.FlyoutMenuRenderer = /*#__PURE__*/function () {
-  function FlyoutMenuRenderer(config) {
-    (0, _classCallCheck2.default)(this, FlyoutMenuRenderer);
-    this.config = config;
-  }
-  return (0, _createClass2.default)(FlyoutMenuRenderer, [{
-    key: "render",
-    value: function render() {
-      var editorFlyout = this.config.editorFlyout;
-      if (!editorFlyout || !editorFlyout.items || !editorFlyout.items.length) {
-        return false;
-      }
-      var editorLi = this.findEditorInMenu("#toplevel_page_elementor-home");
-      if (!editorLi) {
-        return false;
-      }
-      editorLi.classList.add('elementor-has-flyout');
-      var editorFlyoutUl = document.createElement('ul');
-      editorFlyoutUl.className = 'elementor-submenu-flyout elementor-level-3';
-      editorFlyout.items.forEach(function (item) {
-        if (item.has_divider_before) {
-          var dividerLi = document.createElement('li');
-          dividerLi.className = 'elementor-flyout-divider';
-          dividerLi.setAttribute('role', 'separator');
-          editorFlyoutUl.appendChild(dividerLi);
-        }
-        var li = document.createElement('li');
-        li.setAttribute('data-group-id', item.group_id || '');
-        li.setAttribute('data-slug', item.slug || '');
-        var a = document.createElement('a');
-        a.href = item.url;
-        a.textContent = item.label;
-        li.appendChild(a);
-        editorFlyoutUl.appendChild(li);
-      });
-      editorLi.appendChild(editorFlyoutUl);
-      return true;
-    }
-  }, {
-    key: "findEditorInMenu",
-    value: function findEditorInMenu(menuSelector) {
-      var menuItem = document.querySelector(menuSelector);
-      if (!menuItem) {
-        return null;
-      }
-      var submenu = menuItem.querySelector('.wp-submenu');
-      if (!submenu) {
-        return null;
-      }
-      var editorItem = submenu.querySelector('a[href$="page=elementor"]');
-      if (!editorItem) {
-        return null;
-      }
-      return editorItem.closest('li');
-    }
-  }]);
-}();
+exports["default"] = AddSectionArea;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
-/***/ }),
-
-/***/ "../modules/editor-one/assets/js/admin-menu/classes/menu-events-tracker.js":
-/*!*********************************************************************************!*\
-  !*** ../modules/editor-one/assets/js/admin-menu/classes/menu-events-tracker.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.MenuEventsTracker = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var _editorOneEvents = __webpack_require__(/*! elementor-editor-utils/editor-one-events */ "../assets/dev/js/editor/utils/editor-one-events.js");
-var SELECTORS = {
-  elementorMenuLink: '#toplevel_page_elementor-home > a.menu-top',
-  themeBuilderItem: '[data-slug="elementor-theme-builder"] a, .wp-submenu a[href*="page=elementor-theme-builder"]'
+function AddSectionArea(props) {
+  var addAreaElementRef = (0, _react.useRef)(),
+    containerHelper = elementor.helpers.container;
+  (0, _react.useEffect)(function () {
+    var $addAreaElementRef = jQuery(addAreaElementRef.current),
+      defaultDroppableOptions = props.container.view.getDroppableOptions();
+    defaultDroppableOptions.placeholder = false;
+    defaultDroppableOptions.items = '> .elementor-add-section-inner';
+    defaultDroppableOptions.hasDraggingOnChildClass = 'elementor-dragging-on-child';
+    $addAreaElementRef.html5Droppable(defaultDroppableOptions);
+    return function () {
+      $addAreaElementRef.html5Droppable('destroy');
+    };
+  }, []);
+  var handleAddContainerClick = function handleAddContainerClick() {
+    props.setIsRenderPresets(true);
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "elementor-add-section",
+    onClick: function onClick() {
+      return containerHelper.openEditMode(props.container);
+    },
+    ref: addAreaElementRef,
+    role: "button",
+    tabIndex: "0"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "elementor-add-section-inner"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "e-view elementor-add-new-section"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    className: "elementor-add-section-area-button elementor-add-section-button",
+    "aria-label": __('Add new container', 'elementor'),
+    onClick: handleAddContainerClick
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "eicon-plus",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "elementor-add-section-drag-title"
+  }, __('Drag widget here', 'elementor')))));
+}
+AddSectionArea.propTypes = {
+  container: PropTypes.object.isRequired,
+  setIsRenderPresets: PropTypes.func.isRequired
 };
-var MenuEventsTracker = exports.MenuEventsTracker = /*#__PURE__*/function () {
-  function MenuEventsTracker() {
-    (0, _classCallCheck2.default)(this, MenuEventsTracker);
-  }
-  return (0, _createClass2.default)(MenuEventsTracker, null, [{
-    key: "attach",
-    value: function attach() {
-      this.attachElementorMenuClick();
-      this.attachThemeBuilderClick();
-    }
-  }, {
-    key: "attachElementorMenuClick",
-    value: function attachElementorMenuClick() {
-      var menuLink = document.querySelector(SELECTORS.elementorMenuLink);
-      if (!menuLink) {
-        return;
-      }
-      menuLink.addEventListener('click', function () {
-        _editorOneEvents.EditorOneEventManager.sendWpDashElementorMenuClick();
-      });
-    }
-  }, {
-    key: "attachThemeBuilderClick",
-    value: function attachThemeBuilderClick() {
-      document.addEventListener('click', function (event) {
-        var link = event.target.closest(SELECTORS.themeBuilderItem);
-        if (link) {
-          _editorOneEvents.EditorOneEventManager.sendWpDashThemeBuilderClick();
-        }
-      }, true);
-    }
-  }, {
-    key: "trackEditorSubMenuOpened",
-    value: function trackEditorSubMenuOpened() {
-      _editorOneEvents.EditorOneEventManager.sendWpDashEditorSubMenuHover();
-    }
-  }]);
-}();
 
 /***/ }),
 
-/***/ "../modules/editor-one/assets/js/admin-menu/classes/sidebar-menu-handler.js":
-/*!**********************************************************************************!*\
-  !*** ../modules/editor-one/assets/js/admin-menu/classes/sidebar-menu-handler.js ***!
-  \**********************************************************************************/
+/***/ "../modules/nested-elements/assets/js/editor/views/empty.js":
+/*!******************************************************************!*\
+  !*** ../modules/nested-elements/assets/js/editor/views/empty.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = Empty;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../node_modules/@babel/runtime/helpers/defineProperty.js"));
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
+var _addSectionArea = _interopRequireDefault(__webpack_require__(/*! ./add-section-area */ "../modules/nested-elements/assets/js/editor/views/add-section-area.js"));
+var _selectPreset = _interopRequireDefault(__webpack_require__(/*! ./select-preset */ "../modules/nested-elements/assets/js/editor/views/select-preset.js"));
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2.default)(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function Empty(props) {
+  var _useState = (0, _react.useState)(false),
+    _useState2 = (0, _slicedToArray2.default)(_useState, 2),
+    isRenderPresets = _useState2[0],
+    setIsRenderPresets = _useState2[1];
+  props = _objectSpread(_objectSpread({}, props), {}, {
+    setIsRenderPresets: setIsRenderPresets
+  });
+  return isRenderPresets ? /*#__PURE__*/_react.default.createElement(_selectPreset.default, props) : /*#__PURE__*/_react.default.createElement(_addSectionArea.default, props);
+}
+Empty.propTypes = {
+  container: PropTypes.object.isRequired
+};
+
+/***/ }),
+
+/***/ "../modules/nested-elements/assets/js/editor/views/select-preset.js":
+/*!**************************************************************************!*\
+  !*** ../modules/nested-elements/assets/js/editor/views/select-preset.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = SelectPreset;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _editorOneEvents = __webpack_require__(/*! elementor-editor-utils/editor-one-events */ "../assets/dev/js/editor/utils/editor-one-events.js");
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
+function SelectPreset(props) {
+  var containerHelper = elementor.helpers.container,
+    onPresetSelected = function onPresetSelected(preset, container) {
+      var options = {
+        createWrapper: false
+      };
+      _editorOneEvents.EditorOneEventManager.sendCanvasEmptyBoxAction({
+        targetName: 'add_container',
+        metadata: {
+          container_type: 'flexbox',
+          structure_type: preset
+        },
+        containerCreated: true
+      });
+      containerHelper.createContainerFromPreset(preset, container, options);
+    };
+  var handleClose = function handleClose() {
+    _editorOneEvents.EditorOneEventManager.sendCanvasEmptyBoxAction({
+      targetName: 'close',
+      containerCreated: false
+    });
+    props.setIsRenderPresets(false);
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    className: "elementor-add-section-close",
+    "aria-label": __('Close', 'elementor'),
+    onClick: handleClose
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "eicon-close",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "e-view e-con-select-preset"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "e-con-select-preset__title"
+  }, __('Select your Structure', 'elementor')), /*#__PURE__*/_react.default.createElement("div", {
+    className: "e-con-select-preset__list"
+  }, elementor.presetsFactory.getContainerPresets().map(function (preset) {
+    return /*#__PURE__*/_react.default.createElement("button", {
+      type: "button",
+      className: "e-con-preset",
+      "data-preset": preset,
+      key: preset,
+      onClick: function onClick() {
+        return onPresetSelected(preset, props.container);
+      },
+      dangerouslySetInnerHTML: {
+        __html: elementor.presetsFactory.generateContainerPreset(preset)
+      }
+    });
+  }))));
+}
+SelectPreset.propTypes = {
+  container: PropTypes.object.isRequired,
+  setIsRenderPresets: PropTypes.func.isRequired
+};
+
+/***/ }),
+
+/***/ "../modules/nested-elements/assets/js/editor/views/view.js":
+/*!*****************************************************************!*\
+  !*** ../modules/nested-elements/assets/js/editor/views/view.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -1015,118 +742,91 @@ var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/inte
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.SidebarMenuHandler = void 0;
+exports["default"] = exports.View = void 0;
+var _readOnlyError2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/readOnlyError */ "../node_modules/@babel/runtime/helpers/readOnlyError.js"));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var SidebarMenuHandler = exports.SidebarMenuHandler = /*#__PURE__*/function () {
-  function SidebarMenuHandler() {
-    (0, _classCallCheck2.default)(this, SidebarMenuHandler);
-    this.elementorHomeMenu = this.findElementorHomeMenu();
-    if (this.elementorHomeMenu) {
-      this.deactivateOtherMenus();
-      this.activateElementorMenu();
-      this.highlightSubmenu();
-    }
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+var _get2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/get */ "../node_modules/@babel/runtime/helpers/get.js"));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "../node_modules/@babel/runtime/helpers/inherits.js"));
+function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2.default)(o), (0, _possibleConstructorReturn2.default)(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2.default)(t).constructor) : o.apply(t, e)); }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = (0, _get2.default)((0, _getPrototypeOf2.default)(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+var View = exports.View = /*#__PURE__*/function (_$e$components$get$ex) {
+  function View() {
+    (0, _classCallCheck2.default)(this, View);
+    return _callSuper(this, View, arguments);
   }
-  return (0, _createClass2.default)(SidebarMenuHandler, [{
-    key: "findElementorHomeMenu",
-    value: function findElementorHomeMenu() {
-      return document.querySelector('#toplevel_page_elementor-home');
-    }
-  }, {
-    key: "deactivateOtherMenus",
-    value: function deactivateOtherMenus() {
+  (0, _inherits2.default)(View, _$e$components$get$ex);
+  return (0, _createClass2.default)(View, [{
+    key: "events",
+    value: function events() {
       var _this = this;
-      document.querySelectorAll('#adminmenu li.wp-has-current-submenu').forEach(function (item) {
-        if (item !== _this.elementorHomeMenu) {
-          item.classList.remove('wp-has-current-submenu', 'wp-menu-open', 'selected');
-          item.classList.add('wp-not-current-submenu');
-          var link = item.querySelector(':scope > a');
-          if (link) {
-            link.classList.remove('wp-has-current-submenu', 'wp-menu-open', 'current');
-          }
-        }
-      });
-    }
-  }, {
-    key: "activateElementorMenu",
-    value: function activateElementorMenu() {
-      this.elementorHomeMenu.classList.remove('wp-not-current-submenu');
-      this.elementorHomeMenu.classList.add('wp-has-current-submenu', 'wp-menu-open', 'selected');
-      var elementorLink = this.elementorHomeMenu.querySelector(':scope > a.menu-top');
-      if (elementorLink) {
-        elementorLink.classList.add('wp-has-current-submenu', 'wp-menu-open');
-      }
-    }
-  }, {
-    key: "highlightSubmenu",
-    value: function highlightSubmenu() {
-      var currentUrl = new URL(window.location.href);
-      var searchParams = currentUrl.searchParams;
-      var page = searchParams.get('page');
-      var targetSlug = 'elementor';
-      if ('elementor' === page || 'elementor-home' === page) {
-        targetSlug = 'elementor';
-      } else if ('e-form-submissions' === page) {
-        targetSlug = 'e-form-submissions';
-      } else if ('elementor-theme-builder' === page) {
-        targetSlug = 'elementor-theme-builder';
-      }
-      var submenuItems = this.elementorHomeMenu.querySelectorAll('.wp-submenu li');
-      submenuItems.forEach(function (item) {
-        var link = item.querySelector('a');
-        if (!link) {
+      var events = _superPropGet(View, "events", this, 3)([]);
+      events.click = function (e) {
+        // If the clicked Nested Element is not within the currently edited document, don't do anything with it.
+        if (elementor.documents.currentDocument.id.toString() !== e.target.closest('.elementor').dataset.elementorId) {
           return;
         }
-        item.classList.remove('current');
-        link.classList.remove('current');
-        link.setAttribute('aria-current', '');
-        var linkUrl = new URL(link.href, window.location.origin);
-        var linkPage = linkUrl.searchParams.get('page');
-        if (linkPage === targetSlug) {
-          item.classList.add('current');
-          link.classList.add('current');
-          link.setAttribute('aria-current', 'page');
+        var closest = e.target.closest('.elementor-element');
+        var targetContainer = null;
+
+        // For clicks on container/widget.
+        if (['container', 'widget'].includes(closest === null || closest === void 0 ? void 0 : closest.dataset.element_type)) {
+          // eslint-disable-line camelcase
+          // In case the container empty, click should be handled by the EmptyView.
+          var container = elementor.getContainer(closest.dataset.id);
+          if (container.view.isEmpty()) {
+            return true;
+          }
+
+          // If not empty, open it.
+          targetContainer = container;
         }
-      });
+        e.stopPropagation();
+        $e.run('document/elements/select', {
+          container: targetContainer || _this.getContainer()
+        });
+      };
+      return events;
+    }
+
+    /**
+     * Function renderHTML().
+     *
+     * The `renderHTML()` method is overridden as it causes redundant renders when removing focus from any nested element.
+     * This is because the original `renderHTML()` method sets `editModel.renderOnLeave = true;`.
+     */
+  }, {
+    key: "renderHTML",
+    value: function renderHTML() {
+      var templateType = this.getTemplateType(),
+        editModel = this.getEditModel();
+      if ('js' === templateType) {
+        editModel.setHtmlCache();
+        this.render();
+      } else {
+        editModel.renderRemoteServer();
+      }
     }
   }]);
-}();
+}($e.components.get('nested-elements/nested-repeater').exports.NestedViewBase);
+var _default = exports["default"] = View;
 
 /***/ }),
 
-/***/ "../node_modules/@babel/runtime/helpers/classCallCheck.js":
-/*!****************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/classCallCheck.js ***!
-  \****************************************************************/
+/***/ "../node_modules/@babel/runtime/helpers/assertThisInitialized.js":
+/*!***********************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \***********************************************************************/
 /***/ ((module) => {
 
-function _classCallCheck(a, n) {
-  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+function _assertThisInitialized(e) {
+  if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  return e;
 }
-module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ "../node_modules/@babel/runtime/helpers/createClass.js":
-/*!*************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/createClass.js ***!
-  \*************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ "../node_modules/@babel/runtime/helpers/toPropertyKey.js");
-function _defineProperties(e, r) {
-  for (var t = 0; t < r.length; t++) {
-    var o = r[t];
-    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
-  }
-}
-function _createClass(e, r, t) {
-  return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
-    writable: !1
-  }), e;
-}
-module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -1149,162 +849,123 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-/*!***********************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \***********************************************************************/
-/***/ ((module) => {
+/***/ "../node_modules/@babel/runtime/helpers/get.js":
+/*!*****************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/get.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-function _interopRequireDefault(e) {
-  return e && e.__esModule ? e : {
-    "default": e
-  };
+var superPropBase = __webpack_require__(/*! ./superPropBase.js */ "../node_modules/@babel/runtime/helpers/superPropBase.js");
+function _get() {
+  return module.exports = _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) {
+    var p = superPropBase(e, t);
+    if (p) {
+      var n = Object.getOwnPropertyDescriptor(p, t);
+      return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value;
+    }
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _get.apply(null, arguments);
 }
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _get, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
-/***/ "../node_modules/@babel/runtime/helpers/toPrimitive.js":
-/*!*************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/toPrimitive.js ***!
-  \*************************************************************/
+/***/ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js":
+/*!****************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+function _getPrototypeOf(t) {
+  return module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) {
+    return t.__proto__ || Object.getPrototypeOf(t);
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _getPrototypeOf(t);
+}
+module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/inherits.js":
+/*!**********************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/inherits.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ "../node_modules/@babel/runtime/helpers/setPrototypeOf.js");
+function _inherits(t, e) {
+  if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+  t.prototype = Object.create(e && e.prototype, {
+    constructor: {
+      value: t,
+      writable: !0,
+      configurable: !0
+    }
+  }), Object.defineProperty(t, "prototype", {
+    writable: !1
+  }), e && setPrototypeOf(t, e);
+}
+module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
+/*!***************************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \***************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var _typeof = (__webpack_require__(/*! ./typeof.js */ "../node_modules/@babel/runtime/helpers/typeof.js")["default"]);
-function toPrimitive(t, r) {
-  if ("object" != _typeof(t) || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != _typeof(i)) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ "../node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+function _possibleConstructorReturn(t, e) {
+  if (e && ("object" == _typeof(e) || "function" == typeof e)) return e;
+  if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");
+  return assertThisInitialized(t);
 }
-module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
-/***/ "../node_modules/@babel/runtime/helpers/toPropertyKey.js":
+/***/ "../node_modules/@babel/runtime/helpers/readOnlyError.js":
 /*!***************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  !*** ../node_modules/@babel/runtime/helpers/readOnlyError.js ***!
+  \***************************************************************/
+/***/ ((module) => {
+
+function _readOnlyError(r) {
+  throw new TypeError('"' + r + '" is read-only');
+}
+module.exports = _readOnlyError, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/setPrototypeOf.js":
+/*!****************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+function _setPrototypeOf(t, e) {
+  return module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) {
+    return t.__proto__ = e, t;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _setPrototypeOf(t, e);
+}
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/superPropBase.js":
+/*!***************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/superPropBase.js ***!
   \***************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _typeof = (__webpack_require__(/*! ./typeof.js */ "../node_modules/@babel/runtime/helpers/typeof.js")["default"]);
-var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ "../node_modules/@babel/runtime/helpers/toPrimitive.js");
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : i + "";
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+function _superPropBase(t, o) {
+  for (; !{}.hasOwnProperty.call(t, o) && null !== (t = getPrototypeOf(t)););
+  return t;
 }
-module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ "../node_modules/@babel/runtime/helpers/typeof.js":
-/*!********************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/typeof.js ***!
-  \********************************************************/
-/***/ ((module) => {
-
-function _typeof(o) {
-  "@babel/helpers - typeof";
-
-  return module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
-}
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _superPropBase, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ })
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!*********************************************************!*\
-  !*** ../modules/editor-one/assets/js/admin-menu/app.js ***!
-  \*********************************************************/
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var _flyoutMenuRenderer = __webpack_require__(/*! ./classes/flyout-menu-renderer */ "../modules/editor-one/assets/js/admin-menu/classes/flyout-menu-renderer.js");
-var _sidebarMenuHandler = __webpack_require__(/*! ./classes/sidebar-menu-handler */ "../modules/editor-one/assets/js/admin-menu/classes/sidebar-menu-handler.js");
-var _flyoutInteractionHandler = __webpack_require__(/*! ./classes/flyout-interaction-handler */ "../modules/editor-one/assets/js/admin-menu/classes/flyout-interaction-handler.js");
-var _menuEventsTracker = __webpack_require__(/*! ./classes/menu-events-tracker */ "../modules/editor-one/assets/js/admin-menu/classes/menu-events-tracker.js");
-var EditorOneMenu = /*#__PURE__*/function () {
-  function EditorOneMenu() {
-    var _window;
-    (0, _classCallCheck2.default)(this, EditorOneMenu);
-    this.config = ((_window = window) === null || _window === void 0 ? void 0 : _window.editorOneMenuConfig) || {};
-  }
-  return (0, _createClass2.default)(EditorOneMenu, [{
-    key: "init",
-    value: function init() {
-      _menuEventsTracker.MenuEventsTracker.attach();
-      if (this.isSidebarNavigationActive()) {
-        new _sidebarMenuHandler.SidebarMenuHandler();
-        return;
-      }
-      this.buildFlyoutMenus();
-    }
-  }, {
-    key: "isSidebarNavigationActive",
-    value: function isSidebarNavigationActive() {
-      return document.body.classList.contains('e-has-sidebar-navigation');
-    }
-  }, {
-    key: "buildFlyoutMenus",
-    value: function buildFlyoutMenus() {
-      var renderer = new _flyoutMenuRenderer.FlyoutMenuRenderer(this.config);
-      if (renderer.render()) {
-        new _flyoutInteractionHandler.FlyoutInteractionHandler().handle();
-      }
-    }
-  }]);
-}();
-var initEditorOneMenu = function initEditorOneMenu() {
-  var editorOneMenu = new EditorOneMenu();
-  editorOneMenu.init();
-};
-if ('loading' === document.readyState) {
-  document.addEventListener('DOMContentLoaded', initEditorOneMenu);
-} else {
-  initEditorOneMenu();
-}
-})();
-
-/******/ })()
-;
-//# sourceMappingURL=editor-one-menu.js.map
+}]);
+//# sourceMappingURL=481dd84bfd172b56f2c9.bundle.js.map
